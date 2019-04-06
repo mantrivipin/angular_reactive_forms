@@ -10,9 +10,15 @@
               id="userName"
               formControlName="userName"
               class="form-control">
-            <span class="help-block" 
-              *ngIf="!signUpForm.get('userData.userName').valid && signUpForm.get('userData.userName').touched">
-              Please fill your name!
+            <span 
+              *ngIf="!signUpForm.get('userData.userName').valid && signUpForm.get('userData.userName').touched"
+              class="help-block">
+              <span *ngIf="signUpForm.get('userData.userName').errors['required']">
+                Please fill your name!
+              </span>
+              <span *ngIf="signUpForm.get('userData.userName').errors['isNameForbidden']">
+                Please fill a valid name!
+              </span>
             </span>
           </div>
           <div class="form-group">
@@ -48,7 +54,7 @@
             <input type="text" class="form-control" [formControlName]="i">
           </div>
         </div>
-        <button class="btn btn-primary" type="submit" [disabled]="!signUpForm.valid">Submit</button>
+        <button class="btn btn-primary" type="submit">Submit</button>
       </form>
     </div>
   </div>
